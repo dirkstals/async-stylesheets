@@ -1,16 +1,18 @@
-(function(document, id){
+(function(document){
 
-    var noscriptElement = document.querySelector(id),
-        head = document.querySelector('head'),
+    var head = document.querySelector('head'),
+        noscriptElement = head.querySelector('noscript'),
         temp = document.createElement('div');
 
     temp.innerHTML = noscriptElement.textContent;
 
     for(var i = 0; child = temp.children[i]; i++){
 
-        head.appendChild(child.cloneNode());
+        if(child.tagName === 'LINK'){
+            head.appendChild(child.cloneNode());
+        }
     }
 
     head.removeChild(noscriptElement);
 
-})(document, '#async-stylesheets');
+})(document);
